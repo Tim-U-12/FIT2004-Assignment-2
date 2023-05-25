@@ -1,6 +1,14 @@
 from convert_to_adj_list import convert_to_adj_list
 from dfs import dfs
 
+'''
+TODO
+- run ford fulkerson algorithm on the adjacency list
+    - create s source and sink node
+    - ! potentially a source node is not required 
+
+'''
+
 if __name__ == '__main__':
     # Example input
     connections = [(0, 1, 3000), (1, 2, 2000), (1, 3, 1000), (0, 3, 2000), (3, 4, 2000), (3, 2, 1000)]
@@ -13,7 +21,10 @@ if __name__ == '__main__':
 
     # convert to adjacency list
     adj_list = convert_to_adj_list(connections, maxIn, maxOut)
-    
+
     # run dfs
     visited = []
-    dfs(visited, adj_list, 0)
+    #dfs(visited, adj_list, 0)
+
+    
+
