@@ -42,7 +42,7 @@ class CatsTrie:
         O(N), where N is the number of characters in sentences
         '''
         self.root = Node("")                                                # cretes the first node and dub it to be the root node
-        self.most_freq_word = ("", 0)
+        self.most_freq_word = ("", 0)                                       # initialises a tuple containing the most frequent word and it's frequency
         for sentence in sentences:                                          # loops through all of the sentence in sentences 
             self.add(sentence)                                              # then proceeds to add them to the Trie represented by nodes
 
@@ -74,7 +74,10 @@ class CatsTrie:
     def add(self, sentence: str) -> None:
         '''
         Function description:
-        Adds a sentence to the CatsTrie.
+        Adds a sentence to the CatsTrie. It does so by iterating through a given sentence and traversing through
+        the linked list representing a trie, and creating new nodes representing each character in the sentence.
+        It then updates the attributes of the last node. After that, it goes back to all the nodes that it has visited
+        and updates the attributes of those nodes. Lastly the function keeps track of the most frequent nodes.  
 
         :Input:
         argv1 "sentence": a string that has its characters placed within the Trie
@@ -105,7 +108,9 @@ class CatsTrie:
     def update(self, sentence: str, node: Node, freq: int) -> None:
         '''
         Function description:
-        Updates the frequency and completed word of the nodes in the given sentence.
+        iterates through a given sentence, and then it checks to see whether or not the character is none and whether
+        or not the frequency of the sentence is greater than that of the frequency of the word in the current node.
+        it then updates accordingly and moves on to the next node.
 
         :Input:
         argv1 "sentence": a string representing the sentence
@@ -132,8 +137,8 @@ class CatsTrie:
     def autoComplete(self, prompt:str) ->str:
         '''
         Function description:
-        the function takes in a given prompt, then it iterates through the prompt. Once it completes it's
-        iteration, the node that it finishes on will have stored in it the most likely word.
+        the function takes in a given prompt, using the characters from the prompt it iterates through the trie. 
+        Once it completes it's iteration, the node that it finishes on will have stored in it the most likely word.
 
         Approach description (if main function):
         :Input:
@@ -156,18 +161,5 @@ class CatsTrie:
             if node.alphabet[index] is None:                                # checks to se if the prompt can be predicted 
                 return None                                                 # if it is an unpredictable prompt, it returns None
             node = node.alphabet[index]                                     # updates the current node to reflect the next next character in the prompt
-        # if node is None:
-        #     print("hi")
-        #     return None
         return node.completed_word
-    
-sentences = ["abc", "abczacy", "dbcef", "xzz", "gdbc", "abczacy", "xyz", "abczacy", "dbcef", "xyz", "xxx", "xzz"]
-
-
-# Creating a CatsTrie object
-mycattrie = CatsTrie(sentences)
-
-
-prompt = "abc"
-print(mycattrie.autoComplete(prompt))
 
